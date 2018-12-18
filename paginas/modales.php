@@ -19,8 +19,8 @@
 				<label for="caracteristicas">Caracteristicas de la habitacion</label>
 				<textarea value="" class="form-control" rows="4" name="caracteristicas" id="caracteristicas" maxlength="200" placeholder="Caracteristicas de la habitaciones, maximo 200 caracteres"></textarea>
 			  </div>
-			  <div class="form-group">		
-				<button type="submit" id="btnCrearTipo" class="btn btn-info">Crear tipo de habitacion</button>		
+			  <div class="form-group">
+				<button type="submit" id="btnCrearTipo" class="btn btn-info">Crear tipo de habitacion</button>
 			  </div>
 				<div class="alert alert-success hidden alertaCrear" role="alert" id="alertaCrearTipo"></div>
 	      </form>
@@ -28,7 +28,7 @@
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		</div>
-			
+
 	  </div>
 
 	</div>
@@ -56,8 +56,8 @@
 				<label for="descripcion">Descripcion del servicio</label>
 				<textarea value="" class="form-control" rows="4" name="descripcion" id="descripcion" maxlength="200" placeholder="Descripcion del servicio, maximo 200 caracteres"></textarea>
 			  </div>
-			  <div class="form-group">		
-				<button type="submit" id="btnCrearServicioAdicional" class="btn btn-info">Crear Servicio</button>		
+			  <div class="form-group">
+				<button type="submit" id="btnCrearServicioAdicional" class="btn btn-info">Crear Servicio</button>
 			  </div>
 				<div class="alert alert-success hidden alertaCrear" role="alert" id="alertaCrearServicioAdicional"></div>
 	      </form>
@@ -65,7 +65,7 @@
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		</div>
-			
+
 	  </div>
 
 	</div>
@@ -93,8 +93,8 @@
 				<label for="caracteristicas">Caracteristicas de la habitacion</label>
 				<textarea value="" class="form-control" rows="4" name="caracteristicas" id="caracteristicas" maxlength="200" placeholder="Caracteristicas de la habitaciones, maximo 200 caracteres"></textarea>
 			  </div>
-			  <div class="form-group">		
-				<button type="submit" id="btnCrearTipo" class="btn btn-info">Crear tipo de habitacion</button>		
+			  <div class="form-group">
+				<button type="submit" id="btnCrearTipo" class="btn btn-info">Crear tipo de habitacion</button>
 			  </div>
 				<div class="alert alert-success hidden alertaCrear" role="alert" id="alertaCrearTipo"></div>
 	      </form>
@@ -102,7 +102,7 @@
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		</div>
-			
+
 	  </div>
 
 	</div>
@@ -121,24 +121,24 @@
 		  <h4 class="modal-title" id="tituloModal">Ocupar habitacion</h4>
 		</div>
 		<div class="modal-body">
-		  
+
 			  <div class="form-group">
 				<label for="selectServicio">Que servicio deseas tomar ?</label>
 				<select class="form-control" name="selectServicio" id="selectServicio" placeholder="Seleccione servicio" required>
 			  	</select>
-			  			  
+
 			  </div>
-			  
-			  <div class="form-group">		
-				<button type="button" id="btnOcupar" class="btn btn-info"  data-dismiss="modal">Ocupar habitacion</button>		
+
+			  <div class="form-group">
+				<button type="button" id="btnOcupar" class="btn btn-info"  data-dismiss="modal">Ocupar habitacion</button>
 			  </div>
 			<div class="alert alert-success hidden alertaCrear" role="alert" id=""></div>
-	      
+
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		</div>
-			
+
 	  </div>
 
 	</div>
@@ -157,13 +157,13 @@
 		  <h4 class="modal-title" id="tituloModalAdmin">Administrar habitacion</h4>
 		</div>
 		<div class="modal-body">
-		  
+
 			<div class="container-fluid">
 				<div class="row">
-					
+
 					<div class="panel panel-info">
 						  <div class="panel-heading">VENTA DE PRODUCTOS</div>
-						  <div class="panel-body" >				  	
+						  <div class="panel-body" >
 							<div class="col-lg-12">
 								<div class="col-lg-6 divmodal ui-front">
 								  <label>Productos: </label>
@@ -180,25 +180,25 @@
 								<div class="col-lg-2 divmodal">
 								  <div class=""><label>Total: </label></div>
 								  <div id="valorT" class=""></div>
-								</div>	
-							</div>	
+								</div>
+							</div>
 							<div class="col-lg-12"><hr></div>
 							<div class="col-lg-12">
 								<div class="table-responsive">
-							
-									<table id="tablaProductosAgregados" class="table-hover display table" style="width:100%" border>								
-										<thead class="bg-primary"> 						
+
+									<table id="tablaProductosAgregados" class="table-hover display table" style="width:100%" border>
+										<thead class="bg-primary">
 										<tr>
 											<th >Grupo</th>
 											<th >Producto</th>
 											<th >Valor</th>
 											<th >Cant</th>
 											<th >Valor Total</th>
-											<th >Acciones</th>											
+											<th >Acciones</th>
 										</tr>
 										</thead>
-										
-										<tbody>									
+
+										<tbody>
 										</tbody>
 
 										<tfoot class="bg-success">
@@ -207,67 +207,68 @@
 											</th>
 											<th><div id="vlrConsumo1" class="moneda"></div></th>
 											<th>-----</th>
-										</tfoot>								
+										</tfoot>
 									</table>
-							
+
 						  		</div>
 							</div>
-							<div class="col-lg-12">
-								<div class="table-responsive">
-							
-									<table id="tablaResumenHabitacion" class="table-hover display table" style="width:100%" border>								
-										<thead class="bg-warning"> 						
-										<tr>
-											<th >Vlr Servicio</th>
-											<th >Vlr Extra</th>
-											<th >Vlr Consumos</th>
-											<th >Vlr Total</th>
-											<th >Pagado</th>
-											<th >Saldo</th>											
-										</tr>
-										</thead>
-										<tr>
-											<td><div id="vlrServicio" class="moneda">0</div></td>
-											<td><div id="vlrExtra" class="moneda">0</div></td>
-											<td><div id="vlrConsumo2" class="moneda"></div></td>
-											<td><div id="vlrTotal" class="moneda">0</div></td>
-											<td><div id="vlrPagado" class="moneda">0</div></td>
-											<td><div id="vlrSaldo" class="moneda">0</div></td>
-										</tr>
-										<tbody>									
-										</tbody>
-																	
-									</table>
-							
-						  		</div>
-							</div>				
+
 					  </div>
 					  <div class="panel-footer" >
-					  		
+
 					  </div>
 					</div>
 				</div>
 
 				<div class="panel panel-info">
 					<div class="panel-heading">TOTALES</div>
-					<div class="panel-body" >	
+					<div class="panel-body" >
+						<div class="col-lg-12">
+							<div class="table-responsive">
+
+								<table id="tablaResumenHabitacion" class="table-hover display table" style="width:100%" border>
+									<thead class="bg-warning">
+									<tr>
+										<th >Vlr Servicio</th>
+										<th >Vlr Extra</th>
+										<th >Vlr Consumos</th>
+										<th >Vlr Total</th>
+										<th >Pagado</th>
+										<th >Saldo</th>
+									</tr>
+									</thead>
+									<tr>
+										<td><div id="vlrServicio" class="moneda">0</div></td>
+										<td><div id="vlrExtra" class="moneda">0</div></td>
+										<td><div id="vlrConsumo2" class="moneda"></div></td>
+										<td><div id="vlrTotal" class="moneda">0</div></td>
+										<td><div id="vlrPagado" class="moneda">0</div></td>
+										<td><div id="vlrSaldo" class="moneda">0</div></td>
+									</tr>
+									<tbody>
+									</tbody>
+
+								</table>
+
+								</div>
+						</div>
 					</div>
 				</div>
 
-				<hr>  
-				<div class="form-group">		
-					<button type="button" id="" class="btn btn-info">Finalizar servicio</button>		
-					<button type="button" id="" class="btn btn-info">Realizar pago</button>		
+				<hr>
+				<div class="form-group">
+					<button type="button" id="" class="btn btn-info">Finalizar servicio</button>
+					<button type="button" id="" class="btn btn-info">Realizar pago</button>
 				</div>
-				  
+
 				<div class="alert alert-success hidden alertaCrear" role="alert" id=""></div>
 			</div>
-	      
+
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		</div>
-			
+
 	  </div>
 
 	</div>
