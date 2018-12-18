@@ -437,7 +437,7 @@ function marcarOcupadas(fechaI, fechaS, horas, valor, hab, vExtra, vConsumos, vT
 
 	$("#ingresoF"+hab).html(fechaI.substr(0,10));
 	$("#ingresoH"+hab).html(fechaI.substr(11,12));
-	$("#vlrExtra"+hab).html(vExtra).val(vExtra);												
+	$("#vlrExtra"+hab).html(vExtra).val(vExtra);
 
 	$("#salidaF"+hab).html(fechaS.substr(0,10));
 	$("#salidaH"+hab).html(fechaS.substr(11,12));
