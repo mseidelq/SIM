@@ -1,0 +1,99 @@
+@charset "utf-8";
+#principal {
+	width: 100%;
+	margin-right: auto;
+}
+
+.zoom:hover {
+    -ms-transform: scale(1.1); /* IE 9 */
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    transform: scale(1.1); 
+}/
+
+
+#principal #titulo {	
+	border: 1px solid #F10A26;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.tableiconblue{
+	font-size:25px;
+	color:blue;'
+}
+
+.tableiconred{
+	font-size:25px;
+	color:red;'
+}
+.tableicongreen{
+	font-size:25px;
+	color:green;'
+}
+
+
+
+.btnCrear {
+	margin-bottom: 20px;
+	text-align: center;
+	border-top-left-radius: 5px;
+}
+.modalCrear {
+	/*position: absolute,
+	width: 1000px,
+	border: 1px black solid;*/
+
+}
+input{
+	text-transform: uppercase;
+}
+
+.txtTablaPrecios {
+	width: 90px;
+	text-align: right;
+}
+
+
+textarea{
+	text-transform: uppercase;
+}
+table{
+    
+    
+}
+th{
+	text-align: center;
+}
+
+#productos{
+	width: 300px;
+
+}
+
+
+#administrarHabitacion2{
+	/*width: 1000px;
+	position: absolute;*/
+}
+
+/*.divmodal{
+	border: 1px black solid;
+}*/
+
+#productos{
+	width: 400px;
+}
+
+#cantidadP{
+	width: 100px;
+}
+
+.divlineal{ 
+	float:left;
+	margin-left:5px; 
+}
+
+.moneda{
+	text-align: right;
+}
+
+
