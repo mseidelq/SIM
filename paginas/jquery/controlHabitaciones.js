@@ -1,4 +1,4 @@
-noHabvar listaHabitaciones;
+var listaHabitaciones;
 var precios=[];
 var codHab;
 var noHab;
