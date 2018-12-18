@@ -1,7 +1,7 @@
-var listaHabitaciones;
+noHabvar listaHabitaciones;
 var precios=[];
 var codHab;
-var habitacion;
+var noHab;
 var itemsProductos;
 var datosProd;
 var productosAgregados;
@@ -9,7 +9,6 @@ var productosAgregados;
 var objHabitacion;
 // ============================================ CUANDO LA PAGINA SE CARGUE ======================================================================//
 $(document).ready(function(){
-
 
 	traerHabitaciones();
 
@@ -27,26 +26,35 @@ $(document).ready(function(){
 	});
 	// ====================== (( FIN )) TRAE LOS PRODUCTOS DISPONIBLES A LA VARIABLE itemsProductos
 
-
-
+	// Al cerrar el admin de la habitacion verifica si hay saldo por pagar
+	$("#administrarHabitacion").on("hidden.bs.modal", function () {
+	    var saldo = $("#administrarHabitacion #vlrSaldo").val();
+			if(saldo>0)
+			{
+				alert("Hay saldo pendiente por pagar");
+			}
+	});
+	// =========================== FIN ==================================
 
 	$(".btnHabitacion").on("click",function(){
 
 		codHab = $(this).val();
-		habitacion = listaHabitaciones[codHab]["Numero"];
+		noHab = listaHabitaciones[codHab]["Numero"];
 		var tipo = listaHabitaciones[codHab]["CodTipoHab"];
-		if($('#btn'+habitacion).attr("data-target") == "#administrarHabitacion"){
-			$("#tituloModalAdmin").text("Administrar habitación "+habitacion);
-
+		// SI YA ESTA OCUPADA LA HABITACION
+		if($('#btn'+noHab).attr("data-target") == "#administrarHabitacion"){
+			$("#tituloModalAdmin").text("Administrar habitación "+noHab);
 		}
+		//SI NO ESTA OCUPADA LA HABITACION
 		else{
 			precios.length=0;
 			var listaActiva=[];
 
+			//LIMPIA LOS CAMPOS QUE SE VAN A DILIGENCIAR
 			$('#selectServicio').empty();
 			$('#placa').val("");
 			$('#observaciones').val("");
-			$("#tituloModal").text("Ocupar habitacion: "+habitacion);
+			$("#tituloModal").text("Ocupar habitacion: "+noHab);
 
 			// VA A BUSCAR LA LISTA QUE ESTA ACTIVA EN EL MOMENTO
 			$.ajax({
@@ -92,22 +100,23 @@ $(document).ready(function(){
 
 	});
 
+	// DESPUES DE SELECCIONAR EL SERVICIO REQUERIDO SE DA CLICK EN OCUPAR
 	$("#btnOcupar").click(function(){
 
-		$('#btn'+habitacion).attr("data-target","#administrarHabitacion");
-		$('#tr'+habitacion).attr("class","success");
+		$('#btn'+noHab).attr("data-target","#administrarHabitacion"); //SE CAMBIA EL MODAL
+		$('#tr'+noHab).attr("class","success"); // SE MARCA EN VERDE LA OCUPACION
 		var servicio = $("#selectServicio").val();
 		var horas = precios[servicio]['Hora'];
 		var ocupacion = []; var v0=0; var fecha;
-		//TRAE LA HORA ACTUAL
+		//TRAE LA HORA ACTUAL DEL SERVIDOR
 		$.ajax({
 		  type: 'POST',
 		  url: "sql/controlHabitaciones-sql.php",
-		  data: {"horaActual":horas},
+		  data: { "horaActual":horas},
 		  success: function(data2){
 					fecha = JSON.parse(data2);
 
-					ocupacion.push(habitacion); ocupacion.push(horas); ocupacion.push(precios[servicio]['ValorServicio']);
+					ocupacion.push(noHab); ocupacion.push(horas); ocupacion.push(precios[servicio]['ValorServicio']);
 					ocupacion.push(fecha[0].substr(0,10).replace(/-/g,"/"));
 
 					if(fecha[0].substr(20,2)=="am") ocupacion.push(fecha[0].substr(11,12).replace("am","a.m."));
@@ -121,15 +130,15 @@ $(document).ready(function(){
 					// GUARDAR LA OCUPACION
 						$.post("sql/controlHabitaciones-sql.php", {"ocupacion":ocupacion} ,function(data){
 							var prueba = JSON.parse(data);
-							if(prueba[0] == "Exito") $("#ocupacion"+habitacion).val(prueba[1]["IdOcupacion"]);
+							if(prueba[0] == "Exito") $("#ocupacion"+noHab).val(prueba[1]["IdOcupacion"]);
 							else alert(prueba);
-							$('#btn'+habitacion).click();
+							$('#btn'+noHab).click();
 						});
 					},
 
 		  async:false
 		});
-		marcarOcupadas(fecha[0], fecha[1], precios[servicio]['Hora'], precios[servicio]['ValorServicio'], habitacion, v0, v0, precios[servicio]['ValorServicio']);
+		marcarOcupadas(fecha[0], fecha[1], precios[servicio]['Hora'], precios[servicio]['ValorServicio'], noHab, v0, v0, precios[servicio]['ValorServicio']);
 
 	});
 
@@ -206,7 +215,7 @@ $('#administrarHabitacion').on('show.bs.modal', function () {
   	//_valorTotalConsumos = 0;
   	$("#productos").click();
   	productosAgregados = [];
-  	objHabitacion = new Habitacion(habitacion);
+  	objHabitacion = new Habitacion(noHab);
   	//traerProductosAgregados();
 
 });
@@ -344,7 +353,6 @@ function prodEncontrado(datosP){
 	$("#cantidadP").focus();
 
 }
-
 
 //TRAE LAS HABITACIONES Y DETECTA CUALES ESTAN OCUPADAS
 
@@ -561,9 +569,3 @@ function conteo(fecha, hora, ampm, faltante){
 
 	}, 1000);
 }
-
-// Al cerrar el admin de la habitacion verifica si hay saldo por pagar
-$("#administrarHabitacion").on("hidden.bs.modal", function () {
-    var saldo = $("#administrarHabitacion #vlrSaldo").val();
-		alert(saldo);
-});
