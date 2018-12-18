@@ -86,7 +86,7 @@ $dbname = "u207546111_motel";
 
 	if(isset($_POST["horaActual"])){
 		date_default_timezone_set('America/Bogota');
-		//$horas = $_POST["horaActual"];
+		$horas = $_POST["horaActual"];
 		$fecha = array();
 		$fecha [] = date('d-m-Y h:i:s a');
 		$horas = time() + (60*60*$horas);
