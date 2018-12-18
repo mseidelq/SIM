@@ -115,7 +115,7 @@ $(document).ready(function(){
 		  data: { "horaActual":horas},
 		  success: function(data2){
 					fecha = JSON.parse(data2);
-
+					// GUARDA UN ARRAY CON LA INFORMACION DE LA OCUPACION
 					ocupacion.push(noHab); ocupacion.push(horas); ocupacion.push(precios[servicio]['ValorServicio']);
 					ocupacion.push(fecha[0].substr(0,10).replace(/-/g,"/"));
 
@@ -126,6 +126,7 @@ $(document).ready(function(){
 
 					if(fecha[1].substr(20,2)=="am") ocupacion.push(fecha[1].substr(11,12).replace("am","a.m."));
 					else ocupacion.push(fecha[1].substr(11,12).replace("pm","p.m."));
+					//========================================================================
 
 					// GUARDAR LA OCUPACION
 						$.post("sql/controlHabitaciones-sql.php", {"ocupacion":ocupacion} ,function(data){
@@ -138,8 +139,8 @@ $(document).ready(function(){
 
 		  async:false
 		});
+		// MARCA GRAFICAMENTE DE VERDE LA OCUPACION
 		marcarOcupadas(fecha[0], fecha[1], precios[servicio]['Hora'], precios[servicio]['ValorServicio'], noHab, v0, v0, precios[servicio]['ValorServicio']);
-
 	});
 
 
@@ -216,6 +217,7 @@ $('#administrarHabitacion').on('show.bs.modal', function () {
   	$("#productos").click();
   	productosAgregados = [];
   	objHabitacion = new Habitacion(noHab);
+		$("#productos").focus();
   	//traerProductosAgregados();
 
 });
@@ -226,7 +228,7 @@ $('#administrarHabitacion').on('show.bs.modal', function () {
 function Habitacion(numHab) {
 
     // CONSTRUCTOR QUE TRAE LA OCUPACION Y LOS PRODUCTOS DE LA HABITACION ==============================================================================
-    this.numHab = numHab;
+  this.numHab = numHab;
 	this.ocupacion = traeOcupacion(this.numHab);
 	var _productos = traerProductosAgregados(this.ocupacion.IdOcupacion);;
 	var _valorTotalConsumos = 0, _pagado = this.ocupacion.ValorPagado, _saldo = this.ocupacion.ValorTotal-this.ocupacion.ValorPagado;
