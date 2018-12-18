@@ -233,7 +233,7 @@ function Habitacion(numHab) {
 	$("#vlrConsumo2").html(_valorTotalConsumos);
 	$("#vlrTotal").html(this.ocupacion.ValorTotal);
 	$("#vlrPagado").html(_pagado);
-	$("#vlrSaldo").html(_saldo);
+	$("#vlrSaldo").html(_saldo).val(_saldo);
 
 	$(".moneda").priceFormat({ prefix: '', centsLimit: 0});
 	$(".moneda").css("text-align","right");
@@ -561,3 +561,9 @@ function conteo(fecha, hora, ampm, faltante){
 
 	}, 1000);
 }
+
+// Al cerrar el admin de la habitacion verifica si hay saldo por pagar
+$("#administrarHabitacion").on("hidden.bs.modal", function () {
+    var saldo = $("#administrarHabitacion #vlrSaldo").val();
+		alert(saldo);
+});
