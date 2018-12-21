@@ -140,7 +140,7 @@ $(document).ready(function(){
 		  async:false
 		});
 		// MARCA GRAFICAMENTE DE VERDE LA OCUPACION
-		marcarOcupadas(fecha[0], fecha[1], precios[servicio]['Hora'], precios[servicio]['ValorServicio'], noHab, v0, v0, precios[servicio]['ValorServicio']);
+		marcarOcupadas(fecha[0], fecha[1], precios[servicio]['Hora'], precios[servicio]['ValorServicio'], noHab, v0, v0, precios[servicio]['ValorServicio'], precios[servicio]['ValorServicio']);
 	});
 
 
@@ -438,11 +438,11 @@ function traerHabitaciones()
 
 // MARCA LAS OCUPADAS
 
-function marcarOcupadas(fechaI, fechaS, horas, valor, hab, vExtra, vConsumos, vTotal, Saldo){
+function marcarOcupadas(fechaI, fechaS, horas, valor, hab, vExtra, vConsumos, vTotal, vSaldo){
 
 	$("#vlrConsumo"+hab).html(vConsumos).val(vConsumos);
 	$("#total"+hab).html(vTotal).val(vTotal);
-	$("#saldo"+hab).html(Saldo).val(Saldo);
+	$("#saldo"+hab).html(vSaldo).val(vSaldo);
 	$("#vlrServicio"+hab).html(valor).val(valor);
 
 	$("#ingresoF"+hab).html(fechaI.substr(0,10));
@@ -473,7 +473,7 @@ function conteo(fecha, hora, ampm, faltante){
 		//Get todays date and time
 		var now = new Date().getTime();
 		var retorno="";
-		var hoursOld=-1; var valorExtra=0;
+		var valorExtra=0;
 		var IdOcupacion = $("#ocupacion"+faltante).val();
 		// Find the distance between now an the count down date
 		var distance = countDownDate - now;
@@ -508,10 +508,10 @@ function conteo(fecha, hora, ampm, faltante){
 			$("#extra"+faltante).html("<strong>"+retorno+"</strong>");
 			 //PARECE QUE NO ESTA ENTRANDO AL PROCESO
 
-			if(hours > hoursOld){
+			//if(hours < hoursOld){
 				// REPORTA EL PRECIO DE UNA HORA ADICIONAL
 
-				var listaActiva;
+				var listaActiva=[];
 				$.ajax({
 				  type: 'POST',
 				  url: "sql/controlHabitaciones-sql.php",
@@ -524,7 +524,6 @@ function conteo(fecha, hora, ampm, faltante){
 				  async:false
 				});
 
-
 				$.ajax({
 				  type: 'POST',
 				  url: "sql/controlHabitaciones-sql.php",
@@ -533,21 +532,21 @@ function conteo(fecha, hora, ampm, faltante){
 				  success: function(data){
 							var data2 = JSON.parse(data);
 							//alert(data);
-							//var precio = data2[1]["precio"];
+							var precio = data2[1]["precio"];
 
 							/*alert("datos: "+(hours+1)+" - "+IdOcupacion+" - "+listaActiva["CodLista"]);
 
 							********** HAY QUE BUSCAR LA FORMA DE TRAER EL VALOR INSERTADO PARA ACUTALIZARLO
-
+							*/
 							valorExtra = (hours+1) * precio;
-							alert(precio);
-							$("#vlrExtra"+faltante).html(valorExtra);*/
-							hoursOld=hours;
+							//alert(precio);
+							$("#vlrExtra"+faltante).html(valorExtra);
+
 						},
 
 				  async:false
 				});
-			}
+			//}
 		}
 		else{
 
