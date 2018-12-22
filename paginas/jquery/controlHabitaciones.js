@@ -462,7 +462,7 @@ function marcarOcupadas(fechaI, fechaS, horas, valor, hab, vExtra, vConsumos, vT
 
 // INICIA EL CONTEO DE LAS HORAS
 
-function conteo(fecha, hora, ampm, faltante){
+function conteo(fecha, hora, ampm, hab){
 	if(ampm=="pm" && hora[0]<12) hora[0]=hora[0]*1+12;
 	var countDownDate = new Date(fecha[2],fecha[1]-1,fecha[0],hora[0],hora[1],hora[2],0);
 
@@ -473,8 +473,8 @@ function conteo(fecha, hora, ampm, faltante){
 		//Get todays date and time
 		var now = new Date().getTime();
 		var retorno="";
-		var valorExtra=0;
-		var IdOcupacion = $("#ocupacion"+faltante).val();
+		//var valorExtra=0;
+		var IdOcupacion = $("#ocupacion"+hab).val();
 		// Find the distance between now an the count down date
 		var distance = countDownDate - now;
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -485,15 +485,16 @@ function conteo(fecha, hora, ampm, faltante){
 
 		if (days == 0 && hours==0 && minutes==0 && seconds==0) {
 			//clearInterval(x);
-			$("#tr"+faltante).attr("class","danger");
-			$("#faltante"+faltante).html("00:00:00");
+			$("#tr"+hab).attr("class","danger");
+			$("#faltante"+hab).html("00:00:00");
 			$("#timeout")[0].play();
 			//alert("Tiempo cumplido habitacion: "+faltante);	// CAMBIARLO POR UN TOOGLE
 
 		}
 		else if(distance<0){
-			$("#tr"+faltante).attr("class","danger");
-			$("#faltante"+faltante).html("00:00:00");
+			$("#tr"+hab).attr("class","danger");
+			$("#faltante"+hab).html("00:00:00");
+
 			days = -Math.floor(distance / (1000 * 60 * 60 * 24));
 			hours = -(1+Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
 			minutes = -(1+Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
@@ -505,7 +506,7 @@ function conteo(fecha, hora, ampm, faltante){
 			retorno+= minutes + ":";
 			if(seconds<10) retorno+="0";
 			retorno+=seconds;
-			$("#extra"+faltante).html("<strong>"+retorno+"</strong>");
+			$("#extra"+hab).html("<strong>"+retorno+"</strong>");
 			 //PARECE QUE NO ESTA ENTRANDO AL PROCESO
 
 			//if(hours < hoursOld){
@@ -531,16 +532,13 @@ function conteo(fecha, hora, ampm, faltante){
 				  data: { "hExtra": hours+1, "IdOcupacion": IdOcupacion, "listaP": listaActiva["CodLista"] },
 				  success: function(data){
 							var data2 = JSON.parse(data);
-							//alert(data);
-							var precio = data2[1]["precio"];
 
-							/*alert("datos: "+(hours+1)+" - "+IdOcupacion+" - "+listaActiva["CodLista"]);
 
-							********** HAY QUE BUSCAR LA FORMA DE TRAER EL VALOR INSERTADO PARA ACUTALIZARLO
-							*/
-							valorExtra = (hours+1) * precio;
+							//********** HAY QUE BUSCAR LA FORMA DE TRAER EL VALOR INSERTADO PARA ACUTALIZARLO
+
+							var valorExtra = (hours+1) * precio;
 							//alert(precio);
-							$("#vlrExtra"+faltante).html(valorExtra);
+							$("#vlrExtra"+hab).html(valorExtra).val(valorExtra);
 
 						},
 
@@ -557,9 +555,9 @@ function conteo(fecha, hora, ampm, faltante){
 			retorno+= minutes + ":";
 			if(seconds<10) retorno+="0";
 			retorno+=seconds;
-			$("#faltante"+faltante).html("<strong>"+retorno+"</strong>");
+			$("#faltante"+hab).html("<strong>"+retorno+"</strong>");
 			if(hours == 0 && minutes == 15 && seconds == 59){
-				$("#tr"+faltante).attr("class","warning");
+				$("#tr"+hab).attr("class","warning");
 				$("#15left")[0].play();
 				//alert("La habitacion "+faltante+" está por cumplir el tiempo, faltan 15 minutos");
 			}
