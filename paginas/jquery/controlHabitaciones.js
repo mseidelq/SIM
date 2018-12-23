@@ -417,7 +417,7 @@ function traerHabitaciones()
 
 						var nhab = val["NumeroHab"];
 						var fechaI = val["FIngreso"].toLowerCase();
-						var fechaS = val["FSalida"].toLowerCase();
+						var fechaS = val["F_Estimada"].toLowerCase();
 						var vExtra = val["ValorExtra"]; if(vExtra == null) vExtra=0;
 						var vConsumos = val["ValorConsumos"]; if(vConsumos == null) vConsumos=0;
 						var vTotal = val["ValorTotal"]; if(vTotal == null) vTotal=val['ValorServicio'];
