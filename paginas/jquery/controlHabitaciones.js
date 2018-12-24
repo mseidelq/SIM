@@ -396,7 +396,7 @@ function traerHabitaciones()
 			//alert(_habitaciones[i].getParametros());
 
 
-		});
+		});conteo();/*
 		var habOcupadas=[];
 		$.ajax({
 		  type: 'GET',
@@ -432,13 +432,13 @@ function traerHabitaciones()
 
 			});
 
-		}
+		}*/
 	}
 }
 
 // MARCA LAS OCUPADAS
 
-function marcarOcupadas(fechaI, fechaS, horas, valor, hab, vExtra, vConsumos, vTotal, vSaldo){
+function marcarOcupadas(fechaI, fechaS, horas, valor, hab, vExtra, vConsumos, vTotal,T_Faltante, vSaldo){
 
 	$("#vlrConsumo"+hab).html(vConsumos).val(vConsumos);
 	$("#total"+hab).html(vTotal).val(vTotal);
@@ -447,6 +447,7 @@ function marcarOcupadas(fechaI, fechaS, horas, valor, hab, vExtra, vConsumos, vT
 
 	$("#ingresoF"+hab).html(fechaI.substr(0,10));
 	$("#ingresoH"+hab).html(fechaI.substr(11,12));
+	$("#faltante"+hab).html(T_Faltante);
 	$("#vlrExtra"+hab).html(vExtra).val(vExtra);
 
 	$("#salidaF"+hab).html(fechaS.substr(0,10));
@@ -456,35 +457,71 @@ function marcarOcupadas(fechaI, fechaS, horas, valor, hab, vExtra, vConsumos, vT
 	//FALTA PONER EL SALDO  ******************************************
 	$(".moneda").priceFormat({ prefix: '', centsLimit: 0});
 	$('#btn'+hab).attr("data-target","#administrarHabitacion");
-	$('#tr'+hab).attr("class","success");
-	conteo(fechaS.substr(0,10).split("-"), fechaS.substr(11,9).split(":"), fechaS.substr(20,2), hab)
+	if(T_Faltante.substr(0,1)=="-")
+	{
+		$('#tr'+hab).attr("class","danger");
+		$("#extra"+hab).html(T_Faltante.substr(1,8));
+		$("#faltante"+hab).html("00:00:00");
+	}
+	else {
+		$("#faltante"+hab).html(T_Faltante);
+		$('#tr'+hab).attr("class","success");
+	}
+
 }
 
 // INICIA EL CONTEO DE LAS HORAS
 
-function conteo(fecha, hora, ampm, hab){
-	if(ampm=="pm" && hora[0]<12) hora[0]=hora[0]*1+12;
-	var countDownDate = new Date(fecha[2],fecha[1]-1,fecha[0],hora[0],hora[1],hora[2],0);
+function conteo(){
+	/*if(ampm=="pm" && hora[0]<12) hora[0]=hora[0]*1+12;
+	var countDownDate = new Date(fecha[2],fecha[1]-1,fecha[0],hora[0],hora[1],hora[2],0);*/
 
-
+	ocupadas();
 	// Update the count down every 1 second
-	var x = setInterval(function() {
+	var x = setInterval(ocupadas
 
-		//Get todays date and time
-		var now = new Date().getTime();
-		var retorno="";
-		//var valorExtra=0;
-		var IdOcupacion = $("#ocupacion"+hab).val();
-		// Find the distance between now an the count down date
-		var distance = countDownDate - now;
-		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	, 10000);
+}
 
+function ocupadas() {
 
-		
-		$(".moneda").priceFormat({ prefix: '', centsLimit: 0});
+	var habOcupadas=[];
+	$.ajax({
+		type: 'GET',
+		url: "sql/controlHabitaciones-sql.php",
+		data: { "habitaciones": "ocupacion"},
+		success: function(data){
+				var data2 = JSON.parse(data);
+				habOcupadas = data2;
+			},
 
-	}, 1000);
+		async:false
+	});
+	if(habOcupadas.length>0){
+		// EMPEZAR A OCUPAR LAS HABITACIONES QUE ESTAN OCUPADAS EN BD
+		$.each(habOcupadas, function(i, val){
+			$.each(listaHabitaciones, function(i2, val2){
+				if(val["NumeroHab"] == val2["Numero"]){
+
+					var nhab = val["NumeroHab"];
+					var fechaI = val["FIngreso"].toLowerCase();
+					var fechaS = val["F_Estimada"].toLowerCase();
+					var vExtra = val["ValorExtra"]; if(vExtra == null) vExtra=0;
+					var vConsumos = val["ValorConsumos"]; if(vConsumos == null) vConsumos=0;
+					var vTotal = val["ValorTotal"]; if(vTotal == null) vTotal=val['ValorServicio'];
+					var vSaldo = val["ValorPagado"]; if(vSaldo == null) vSaldo=0;
+					var T_Faltante = val["T_Faltante"];
+					vSaldo = vTotal - vSaldo;
+					$("#ocupacion"+nhab).val(val["IdOcupacion"]);
+
+					marcarOcupadas(fechaI, fechaS, val["Horas"], val['ValorServicio'], nhab, vExtra, vConsumos, vTotal, T_Faltante, vSaldo);
+
+				}
+			});
+
+		});
+
+	}
+
+	$(".moneda").priceFormat({ prefix: '', centsLimit: 0});
 }
