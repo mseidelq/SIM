@@ -396,43 +396,8 @@ function traerHabitaciones()
 			//alert(_habitaciones[i].getParametros());
 
 
-		});conteo();/*
-		var habOcupadas=[];
-		$.ajax({
-		  type: 'GET',
-		  url: "sql/controlHabitaciones-sql.php",
-		  data: { "habitaciones": "ocupacion"},
-		  success: function(data){
-					var data2 = JSON.parse(data);
-					habOcupadas = data2;
-				},
-
-		  async:false
 		});
-		if(habOcupadas.length>0){
-			// EMPEZAR A OCUPAR LAS HABITACIONES QUE ESTAN OCUPADAS EN BD
-			$.each(habOcupadas, function(i, val){
-				$.each(listaHabitaciones, function(i2, val2){
-					if(val["NumeroHab"] == val2["Numero"]){
-
-						var nhab = val["NumeroHab"];
-						var fechaI = val["FIngreso"].toLowerCase();
-						var fechaS = val["F_Estimada"].toLowerCase();
-						var vExtra = val["ValorExtra"]; if(vExtra == null) vExtra=0;
-						var vConsumos = val["ValorConsumos"]; if(vConsumos == null) vConsumos=0;
-						var vTotal = val["ValorTotal"]; if(vTotal == null) vTotal=val['ValorServicio'];
-						var vSaldo = val["ValorPagado"]; if(vSaldo == null) vSaldo=0;
-						vSaldo = vTotal - vSaldo;
-						$("#ocupacion"+nhab).val(val["IdOcupacion"]);
-
-						marcarOcupadas(fechaI, fechaS, val["Horas"], val['ValorServicio'], nhab, vExtra, vConsumos, vTotal, vSaldo);
-
-					}
-				});
-
-			});
-
-		}*/
+		conteo();
 	}
 }
 
