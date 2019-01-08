@@ -480,7 +480,6 @@ function ocupadas() {
 					$("#ocupacion"+nhab).val(val["IdOcupacion"]);
 
 					marcarOcupadas(fechaI, fechaS, val["Horas"], val['ValorServicio'], nhab, vExtra, vConsumos, vTotal, T_Faltante, vSaldo);
-					marcarOcupadas(fechaI, fechaS, val["Horas"], val['ValorServicio'], nhab, vExtra, vConsumos, vTotal, T_Faltante, vSaldo);
 
 				}
 			});
