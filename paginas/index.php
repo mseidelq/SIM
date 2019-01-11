@@ -10,7 +10,7 @@
 <script src="../datatable/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../priceformat/jquery.priceformat.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 
+
 <link href="../datatable/DataTables-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
 <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
@@ -25,44 +25,44 @@
 <body style="padding-top: 60px">
 <?php include("menu.php") ?>
 <?php include("phpFunciones/funciones.php");
-	  include("modales.php");
+	  include("modales/modales.php");
 ?>
 
 <div class="container" id="principal">
-  
+
 	<div class="col-lg-12 text-center alert-info" id="titulo">
 		<h2 >CONTROL DE HABITACIONES</h1>
 	</div>
- 	
+
   <div role="tabpanel">
 	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#habitaciones" data-toggle="tab" role="tab" aria-controls="tab1">Habitaciones</a></li>	    
+	    <li role="presentation" class="active"><a href="#habitaciones" data-toggle="tab" role="tab" aria-controls="tab1">Habitaciones</a></li>
 	    <li role="presentation"><a href="#resumencaja" data-toggle="tab" role="tab" aria-controls="tab2">Resumen de caja</a></li>
-	    
+
 	  </ul>
 	  <div id="tabContent1" class="tab-content">
 	    <div role="tabpanel" class="tab-pane fade in active" id="habitaciones">
 	      	<ol class="breadcrumb">
 				<li><a href="#">Inicio</a></li>
-				<li class="active">Control Caja</li>				
+				<li class="active">Control Caja</li>
   			</ol>
       		<input type="text" id="codigobarras" hidden="true">
        		<div class="row">
-				
 
-				<!-- PANEL PARA PRECIOS DE LA LISTA -->								
-				
+
+				<!-- PANEL PARA PRECIOS DE LA LISTA -->
+
 				<div class="col-lg-12 col-md-6">
 					<div class="panel panel-info">
 					  <div class="panel-heading">OCUPACION HABITACIONES</div>
 					  <div class="panel-body">
-						
-						<div class="col-lg-12 col-md-12">							
-							
+
+						<div class="col-lg-12 col-md-12">
+
 							<div class="table-responsive">
-							
-								<table id="tablaControlHabitaciones" class="table-hover display table" style="width:100%" border>								
-									<thead class="bg-primary"> 						
+
+								<table id="tablaControlHabitaciones" class="table-hover display table" style="width:100%" border>
+									<thead class="bg-primary">
 									<tr>
 										<th >Hab</th>
 										<th >Tipo</th>
@@ -80,27 +80,27 @@
 										<th >Observaciones</th>
 									</tr>
 									</thead>
-									
-									<tbody>									
+
+									<tbody>
 									</tbody>
 
-									<tfoot></tfoot>								
+									<tfoot></tfoot>
 								</table>
-							
+
 						  	</div>
-						  
+
 						</div>
 
 					</div>
 				  </div>
 				</div>
-								     		
+
        		</div>
-       		
+
        		<audio id="15left">
-       			<source src="../mp3/15left.mp3" type="audio/mp3" />       			
+       			<source src="../mp3/15left.mp3" type="audio/mp3" />
        		</audio>
-       		<audio id="timeout">       			
+       		<audio id="timeout">
        			<source src="../mp3/timeout.mp3" type="audio/mp3" />
        		</audio>
         </div>
@@ -108,9 +108,9 @@
         <div role="tabpanel" class="tab-pane fade" id="resumencaja">
 	      	<ol class="breadcrumb">
 				<li><a href="#">Inicio</a></li>
-				<li class="active">Resumen de caja</li>				
+				<li class="active">Resumen de caja</li>
 			</ol>
-        </div>		    
+        </div>
     </div>
   </div>
 </div>
